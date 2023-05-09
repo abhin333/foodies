@@ -8,15 +8,17 @@ import { NavLink } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import Menu from "@mui/material/Menu/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 import { Table } from "react-bootstrap";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect } from "react";
+import { RMV } from "../../Redux/Action/action";
 
 function Header() {
   const getData = useSelector((state) => state.cartreducer.carts);
-  console.log("wwwwwwwww", getData);
+  const [price,setPrice]=useState()
+  console.log("price",price);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -26,15 +28,25 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const dispatch=useDispatch()
 
-  const iteam_Del = (e) => {
-    console.log("adyfdtuauyd", e);
-    try {
-      getData.pop(...getData, getData.e);
-    } catch (error) {
-      console.log("dddd", error);
-    }
+  
+  const iteam_Del = (id,) => {
+    console.log("dele",id);
+   dispatch(RMV(id,))
   };
+
+  const total=(()=>{
+    let price=0;
+    getData.map((e,key)=>{
+      price=e.price+price
+    });
+    setPrice(price)
+  });
+  
+  useEffect(()=>{
+    total(); 
+  },[total])
 
   return (
     <>
@@ -87,7 +99,7 @@ function Header() {
                     return (
                       <tr>
                         <td>
-                          <NavLink to={`/cart/${e.id}`}>
+                          <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
                             <img
                               src={e.imgdata}
                               alt="img"
@@ -112,7 +124,7 @@ function Header() {
                         <td>
                           <DeleteIcon
                             sx={{ color: "red", cursor: "pointer" }}
-                            onClick={() => iteam_Del(e)}
+                            onClick={() => iteam_Del(e.id)}
                           />
                         </td>
                       </tr>
@@ -122,17 +134,19 @@ function Header() {
                 <tr>
                   <td>
                     <p style={{ paddingTop: -12, fontFamily: "ittalic" }}>
-                      Total : 300
+                      Total : {price}
                     </p>
                   </td>
                 </tr>
               </Table>
             </div>
           ) : (
-            <p style={{ marginTop: 15, padding: 4 }}>
+            <div className="cart_img  d-flex justify-content-end">
+            <p style={{ marginTop: 15, paddingLeft:56 ,}}>
               your card is empty
-              <img src="./cartimage.gif" alt="cart image" />
+              <img src="./cart2.gif" alt="cart image" width='35px'/>
             </p>
+            </div>
           )}
         </Menu>
       </Navbar>
