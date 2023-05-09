@@ -26,12 +26,12 @@ export const cartreducer=(state =INIT_STATE,action)=>{
 
         case "DEC_COUNT":
             const dec = state.carts.findIndex((iteam) => iteam.id === action.payload.id);
-            if(state.carts[dec].qnty >=1){
+            if(state.carts[dec].qnty >1){
 
                 const dltiteam= state.carts[dec ].qnty -=1;
             }
             else{
-                alert("invalid count")
+                alert("invalid count number atleast one number should be purchase")
             }
             return {
                 ...state,

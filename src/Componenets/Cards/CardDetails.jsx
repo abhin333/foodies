@@ -82,7 +82,7 @@ function CardDetails() {
                         </p>
                         <p>
                           <strong>Total</strong>
-                          {element.price}
+                          {element.price* element.qnty}
                         </p>
                         <div
                           className="mt-5 d-flex justify-content-between align-items-center bg-secondary "
