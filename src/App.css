@@ -6,6 +6,11 @@
     left: 20px;
     position: relative;
 }
-.iteamdetails{
-   background-color: antiquewhite;
+
+
+.card-stack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust the height as needed */
 }

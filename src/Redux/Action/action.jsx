@@ -19,3 +19,12 @@ export const DEC =(iteam)=>{
         payload: iteam
     }
 }
+
+
+export const CARD=(values)=>{
+    console.log("values",values);
+    return{
+        type:'CARD_DETAILS',
+        payload:values
+    }
+}

@@ -3,9 +3,11 @@ import { Table } from "react-bootstrap";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RMV,ADD,DEC } from "../../Redux/Action/action";
+import { RMV, ADD, DEC } from "../../Redux/Action/action";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Payment from "../Payment/Payment";
+import { Link } from 'react-router-dom';
 function CardDetails() {
   const [data, setData] = useState([]);
   const { id } = useParams();
@@ -30,13 +32,13 @@ function CardDetails() {
     dispatch(RMV(id));
     Navigate("/");
   };
- const increment=(element)=>{
-    dispatch(ADD(element))
- }
- 
- const decrement=(element)=>{
-    dispatch(DEC(element))
- }
+  const increment = (element) => {
+    dispatch(ADD(element));
+  };
+
+  const decrement = (element) => {
+    dispatch(DEC(element));
+  };
 
   return (
     <>
@@ -82,7 +84,7 @@ function CardDetails() {
                         </p>
                         <p>
                           <strong>Total</strong>
-                          {element.price* element.qnty}
+                          {element.price * element.qnty}
                         </p>
                         <div
                           className="mt-5 d-flex justify-content-between align-items-center bg-secondary "
@@ -102,6 +104,11 @@ function CardDetails() {
                             +
                           </span>
                         </div>
+                        <dir>
+                          <Link to="/payment"> 
+                          <button>buynow</button>
+                          </Link>
+                        </dir>
                       </td>
                       <td>
                         <p>

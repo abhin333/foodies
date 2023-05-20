@@ -1,5 +1,6 @@
 const INIT_STATE={
-    carts :[]
+    carts :[],
+    payments_details:[]
 }
 
 export const cartreducer=(state =INIT_STATE,action)=>{
@@ -37,7 +38,13 @@ export const cartreducer=(state =INIT_STATE,action)=>{
                 ...state,
                 carts:[...state.carts]
             }
-        default:
-            return  state
-    }
-}
+        case "CARD_DETAILS":   
+        const payment_data=action.payload        
+            return{
+                ...state,
+                payments_details:payment_data
+            }
+            default:
+                return  state
+            }
+        }
